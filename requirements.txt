@@ -1,0 +1,6 @@
+# لتشغيل التطبيق على سطح المكتب (ويندوز/لينكس) للتجربة قبل البناء
+kivy==2.3.0
+kivymd==1.1.1
+arabic_reshaper
+python-bidi
+pillow
