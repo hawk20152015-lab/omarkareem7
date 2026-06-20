@@ -1,10 +1,10 @@
-github/workflows/build.ymlname: Build Android APK
+name: Build Android APK
 
 on:
   push:
     branches: [ main, master ]
   workflow_dispatch:
-  
+
 jobs:
   build-android:
     runs-on: ubuntu-latest
