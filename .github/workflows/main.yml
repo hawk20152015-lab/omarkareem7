@@ -1,24 +1,3 @@
-name: Build Android APK
-
-on: [push, workflow_dispatch]
-
-jobs:
-  build-android:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Build APK
-        uses: ArtemSBulgakov/buildozer-action@v1
-        with:
-          command: buildozer android debug
-          workdir: .
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: hesabat-apk
-          path: ./**/bin/*.apk
-          if-no-files-found: error
 - name: Install dependencies
   run: |
     sudo apt-get update
