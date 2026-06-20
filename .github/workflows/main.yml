@@ -1,10 +1,21 @@
-- name: Install dependencies
-  run: |
-    sudo apt-get update
-    sudo apt-get install -y python3-pip build-essential git zip unzip zlib1g-dev libltdl-dev libffi-dev libssl-dev autoconf automake libtool pkg-config cmake modules-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstreamer-plugins-base1.0-dev
-    pip3 install --user --upgrade buildozer Cython virtualenv
+name: Build Android APK
 
-- name: Build Android APK
-  run: |
-    export PATH=$PATH:~/.local/bin
-    buildozer android debug
+on: [push, workflow_dispatch]
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build APK
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          command: buildozer android debug
+          workdir: .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hesabat-apk
+          path: ./**/bin/*.apk
+          if-no-files-found: error
